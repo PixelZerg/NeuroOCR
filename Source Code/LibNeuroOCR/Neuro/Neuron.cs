@@ -10,94 +10,74 @@ namespace LibNeuroOCR.Neuro
 {
     public class Neuron : INeuron
     {
-        private double _bias;
-        private double _delta;
-        private NList _forwardConnections;
-        private Dictionary<INeuron, double> _inputs;
-        private double _output;
-        private INStrategy _strategy;
+        private double _bias = 0d;
+        private double _delta = 0d;
+        private NList _forwardConnections = new NList();
+        private Dictionary<INeuron, double> _inputs = new Dictionary<INeuron, double>();
+        private double _output = 0d;
+        private INStrategy _strategy = null;
 
         public double BiasValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return _bias; }
+            set { _bias = value; }
         }
 
         public double DeltaValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return _delta; }
+            set { _delta = value; }
         }
 
         public NList ForwardConnections
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return _forwardConnections; }
         }
 
         public Dictionary<INeuron, double> Inputs
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return _inputs; }
         }
 
         public double OutputValue
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return _output; }
+            set { _output = value; }
         }
 
         public INStrategy Strategy
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { return _strategy; }
+            set { _strategy = value; }
         }
 
         public void UpdateDelta(double errorFactor)
         {
-            throw new NotImplementedException();
+            CheckStrategyNull();
+            this.DeltaValue = this.Strategy.FindDelta(this.OutputValue, errorFactor);
         }
 
         public void UpdateFreeParams()
         {
-            throw new NotImplementedException();
+            CheckStrategyNull();
+            this.BiasValue = this.Strategy.FindNewBias(this.BiasValue, this.DeltaValue);
+            this.Strategy.UpdateWeights(ref this._inputs, this.DeltaValue);
         }
 
         public void UpdateOutput()
         {
-            throw new NotImplementedException();
+            CheckStrategyNull();
+            double num = this.Strategy.FindNetValue(this.Inputs, this.BiasValue);
+            this.OutputValue = this.Strategy.Activation(num);
+        }
+
+        public bool CheckStrategyNull()
+        {
+            if (this.Strategy == null)
+            {
+                throw new Exception.NullStrategyException("Neuron@" + this.GetHashCode() + "'s Strategy has not been initialised!", null);
+            }
+            return true;
         }
     }
 }
