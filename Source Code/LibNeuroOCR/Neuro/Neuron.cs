@@ -71,13 +71,10 @@ namespace LibNeuroOCR.Neuro
             this.OutputValue = this.Strategy.Activation(num);
         }
 
-        public bool CheckStrategyNull()
+        public void CheckStrategyNull()
         {
             if (this.Strategy == null)
-            {
                 throw new Exception.NullStrategyException("Neuron@" + this.GetHashCode() + "'s Strategy has not been initialised!", null);
-            }
-            return true;
         }
     }
 }

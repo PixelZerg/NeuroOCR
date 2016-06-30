@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\NList.cs" />
+    <Compile Include="Data\TrainingData.cs" />
+    <Compile Include="Exception\MooooException.cs" />
+    <Compile Include="Exception\NeuroException.cs" />
+    <Compile Include="Exception\NullStrategyException.cs" />
     <Compile Include="Interface\INetworkFactory.cs" />
     <Compile Include="Interface\INeuralNetwork.cs" />
     <Compile Include="Interface\INeuron.cs" />
