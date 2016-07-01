@@ -51,41 +51,9 @@ namespace LibNeuroOCR.Neuro
 
         public void ConnectLayers(NList l1, NList l2)
         {
-            //IEnumerator enumerator2;
             CheckInadequateLayers();
             try
             {
-                //    enumerator2 = l1.GetEnumerator();
-                //    while (enumerator2.MoveNext())
-                //    {
-                //        IEnumerator enumerator;
-                //        INeuron current = (INeuron)enumerator2.Current;
-                //        try
-                //        {
-                //            enumerator = l2.GetEnumerator();
-                //            while (enumerator.MoveNext())
-                //            {
-                //                INeuron destination = (INeuron)enumerator.Current;
-                //                this.ConnectNeurons(current, destination);
-                //            }
-                //            continue;
-                //        }
-                //        finally
-                //        {
-                //            if (enumerator is IDisposable)
-                //            {
-                //                ((IDisposable)enumerator).Dispose();
-                //            }
-                //        }
-                //    }
-                //}
-                //finally
-                //{
-                //    if (enumerator2 is IDisposable)
-                //    {
-                //        ((IDisposable)enumerator2).Dispose();
-                //    }
-                //}
                 for (int i = 0; i < l1.Count; i++)
                 {
                     for (int j = 0; j < l2.Count; j++)
@@ -137,7 +105,58 @@ namespace LibNeuroOCR.Neuro
 
         public List<double> RunNetwork(List<double> inputs)
         {
-            throw new NotImplementedException();
+            List<double> output = new List<double>();
+            for (int i = 0; i <= inputs.Count-1; i ++)
+            {
+                try
+                {
+                    inputs[i] = (double)(inputs[(int)i]);
+                }
+                catch (System.Exception e)
+                {
+                    throw new NeuroException("Unable to convert the  input value at location " + (i + 1) + " to double", null);
+                }
+            }
+            try
+            {
+                long num2 = 0L;
+                using (IEnumerator enumerator2 = this.InputLayer.GetEnumerator())
+                {
+                    while (enumerator2.MoveNext())
+                    {
+                        INeuron current = (INeuron)enumerator2.Current;
+                        current.OutputValue = DoubleType.FromObject(inputs[(int)num2]);
+                        num2 += 1L;
+                    }
+                }
+                long num3 = this._layers.Count - 1;
+                for (num2 = 1L; num2 <= num3; num2 += 1L)
+                {
+                    IEnumerator enumerator;
+                    NList layer = this._layers[(int)num2];
+                    try
+                    {
+                        enumerator = layer.GetEnumerator();
+                        while (enumerator.MoveNext())
+                        {
+                            ((INeuron)enumerator.Current).UpdateOutput();
+                        }
+                    }
+                    finally
+                    {
+                        if (enumerator is IDisposable)
+                        {
+                            ((IDisposable)enumerator).Dispose();
+                        }
+                    }
+                }
+                output = this.GetOutput();
+            }
+            catch (Exception e)
+            {
+                throw new NeuroException("Error occurred while running the network. ", e);
+            }
+            return output;
         }
 
         public void TrainNetwork(TrainingData td)
