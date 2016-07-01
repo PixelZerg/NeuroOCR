@@ -125,14 +125,14 @@ namespace LibNeuroOCR.Neuro
                     while (enumerator2.MoveNext())
                     {
                         INeuron current = (INeuron)enumerator2.Current;
-                        current.OutputValue = DoubleType.FromObject(inputs[(int)num2]);
+                        current.OutputValue = (double)(inputs[(int)num2]);
                         num2 += 1L;
                     }
                 }
                 long num3 = this._layers.Count - 1;
                 for (num2 = 1L; num2 <= num3; num2 += 1L)
                 {
-                    IEnumerator enumerator;
+                    IEnumerator enumerator = null;
                     NList layer = this._layers[(int)num2];
                     try
                     {
@@ -152,7 +152,7 @@ namespace LibNeuroOCR.Neuro
                 }
                 output = this.GetOutput();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 throw new NeuroException("Error occurred while running the network. ", e);
             }
