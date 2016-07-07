@@ -74,9 +74,9 @@ namespace LibNeuroOCR.Neuro
             try
             {
                 long num2 = this._layers.Count - 1;
-                for (long i = 1L; i <= num2; i += 1L)
+                for (int i = 1; i <= num2; i ++)
                 {
-                    this.ConnectLayers(this._layers[(int)(i - 1L)], this._layers[(int)i]);
+                    this.ConnectLayers(this._layers[i - 1], this._layers[i]);
                 }
             }
             catch (System.Exception e)
@@ -106,7 +106,7 @@ namespace LibNeuroOCR.Neuro
         public List<double> RunNetwork(List<double> inputs)
         {
             List<double> output = new List<double>();
-            for (int i = 0; i <= inputs.Count - 1; i++)
+            for (int i = 0; i < inputs.Count; i++)
             {
                 try
                 {
@@ -135,7 +135,7 @@ namespace LibNeuroOCR.Neuro
                     item.OutputValue = (double)(inputs[no]);
                     no++;
                 }
-                for (no = 1; no <= this.Layers.Count - 1; no += 1)
+                for (no = 1; no < this.Layers.Count; no += 1)
                 {
                     //IEnumerator enumerator = null;
                     //NList layer = this._layers[(int)no];
@@ -167,7 +167,6 @@ namespace LibNeuroOCR.Neuro
 
         public void TrainNetwork(TrainingData td)
         {
-            long num;
             CheckInadequateLayers();
             if (td.Inputs.Count != this.InputLayer.Count)
             {
@@ -177,28 +176,26 @@ namespace LibNeuroOCR.Neuro
             {
                 throw new NeuroException("Number of outputs doesn'''t match number of neurons in output layer", null);
             }
-            long num9 = td.Inputs.Count - 1;
-            for (num = 0L; num <= num9; num += 1L)
+            for (int i = 0; i < td.Inputs.Count; i++)
             {
                 try
                 {
-                    td.Inputs[(int)num] = td.Inputs[(int)num];
+                    td.Inputs[i] = td.Inputs[i];
                 }
                 catch (System.Exception e)
                 {
-                    throw new NeuroException("Unable to convert the input value at location " + (num + 1L) + " to double", null);
+                    throw new NeuroException("Error at input value loc:  " + (i + 1), e);
                 }
             }
-            long num8 = td.Outputs.Count - 1;
-            for (num = 0L; num <= num8; num += 1L)
+            for (int i = 0; i < td.Outputs.Count; i++)
             {
                 try
                 {
-                    td.Outputs[(int)num] = td.Outputs[(int)num];
+                    td.Outputs[(int)i] = td.Outputs[i];
                 }
                 catch (System.Exception e)
                 {
-                    throw new NeuroException("Unable to convert the output value at location " + (num + 1L) + " to double", null);
+                    throw new NeuroException("Error at output value loc: " + (i + 1L), e);
                 }
             }
             try
@@ -219,7 +216,7 @@ namespace LibNeuroOCR.Neuro
                     this.InputLayer[i].OutputValue = td.Inputs[i];
                 }
 
-                for (int i = 1; i <= this.Layers.Count-1; i += 1)
+                for (int i = 1; i < this.Layers.Count; i ++)
                 {
                     //IEnumerator enumerator5;
                     //NList layer2 = this._layers[(int)num2];
