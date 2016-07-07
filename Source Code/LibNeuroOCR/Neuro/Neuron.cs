@@ -10,12 +10,19 @@ namespace LibNeuroOCR.Neuro
 {
     public class Neuron : INeuron
     {
-        private double _bias = 0d;
+        private double _bias = Utils.Rand();
         private double _delta = 0d;
         private NList _forwardConnections = new NList();
         private Dictionary<INeuron, double> _inputs = new Dictionary<INeuron, double>();
         private double _output = 0d;
         private INStrategy _strategy = null;
+
+        public Neuron() { }
+
+        public Neuron(INStrategy strategy)
+        {
+            _strategy = strategy;
+        }
 
         public double BiasValue
         {

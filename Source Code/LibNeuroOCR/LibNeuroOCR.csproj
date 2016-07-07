@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Data\NList.cs" />
     <Compile Include="Data\TrainingData.cs" />
+    <Compile Include="Exception\InadequateLayersException.cs" />
     <Compile Include="Exception\MooooException.cs" />
     <Compile Include="Exception\NeuroException.cs" />
     <Compile Include="Exception\NullStrategyException.cs" />
@@ -49,8 +50,12 @@
     <Compile Include="Interface\INeuralNetwork.cs" />
     <Compile Include="Interface\INeuron.cs" />
     <Compile Include="Interface\INStrategy.cs" />
+    <Compile Include="Neuro\BackPropFactory.cs" />
+    <Compile Include="Neuro\BackPropStrategy.cs" />
+    <Compile Include="Neuro\NeuralNetwork.cs" />
     <Compile Include="Neuro\Neuron.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
