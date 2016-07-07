@@ -119,16 +119,6 @@ namespace LibNeuroOCR.Neuro
             }
             try
             {
-                //int no = 0;
-                //using (IEnumerator enumerator2 = this.InputLayer.GetEnumerator())
-                //{
-                //    while (enumerator2.MoveNext())
-                //    {
-                //        INeuron current = (INeuron)enumerator2.Current;
-                //        current.OutputValue = (double)(inputs[(int)num2]);
-                //        num2 += 1L;
-                //    }
-                //}
                 int no = 0;
                 foreach (var item in this.InputLayer)
                 {
@@ -137,13 +127,6 @@ namespace LibNeuroOCR.Neuro
                 }
                 for (no = 1; no < this.Layers.Count; no += 1)
                 {
-                    //IEnumerator enumerator = null;
-                    //NList layer = this._layers[(int)no];
-                    //enumerator = layer.GetEnumerator();
-                    //while (enumerator.MoveNext())
-                    //{
-                    //    ((INeuron)enumerator.Current).UpdateOutput();
-                    //}
                     foreach (var item in this._layers[(int)no])
                     {
                         try
@@ -200,17 +183,6 @@ namespace LibNeuroOCR.Neuro
             }
             try
             {
-                //INeuron current;
-                //long num3 = 0L;
-                //using (IEnumerator enumerator6 = this.InputLayer.GetEnumerator())
-                //{
-                //    while (enumerator6.MoveNext())
-                //    {
-                //        current = (INeuron)enumerator6.Current;
-                //        current.OutputValue = td.Inputs[(int)num3];
-                //        num3 += 1L;
-                //    }
-                //}
                 for (int i = 0; i < this.InputLayer.Count; i++)
                 {
                     this.InputLayer[i].OutputValue = td.Inputs[i];
@@ -218,39 +190,11 @@ namespace LibNeuroOCR.Neuro
 
                 for (int i = 1; i < this.Layers.Count; i ++)
                 {
-                    //IEnumerator enumerator5;
-                    //NList layer2 = this._layers[(int)num2];
-                    //try
-                    //{
-                    //    enumerator5 = layer2.GetEnumerator();
-                    //    while (enumerator5.MoveNext())
-                    //    {
-                    //        current = (INeuron)enumerator5.Current;
-                    //        current.UpdateOutput();
-                    //    }
-                    //}
-                    //finally
-                    //{
-                    //    if (enumerator5 is IDisposable)
-                    //    {
-                    //        ((IDisposable)enumerator5).Dispose();
-                    //    }
-                    //}
                     foreach (var item in this._layers[i])
                     {
                         item.UpdateOutput();
                     }
                 }
-                //int num3 = 0;
-                //using (IEnumerator enumerator4 = this.OutputLayer.GetEnumerator())
-                //{
-                //    while (enumerator4.MoveNext())
-                //    {
-                //        current = (INeuron)enumerator4.Current;
-                //        current.UpdateDelta(td.Outputs[(int)num3]- current.OutputValue);
-                //        num3 += 1;
-                //    }
-                //}
                 for (int i = 0; i < this.OutputLayer.Count; i++)
                 {
                     this.OutputLayer[i].UpdateDelta(td.Outputs[i] - this.OutputLayer[i].OutputValue);
@@ -258,28 +202,6 @@ namespace LibNeuroOCR.Neuro
                 for (int i = this._layers.Count - 2; i >= 1L; i ++)
                 {
                     IEnumerator enumerator3;
-                    //NList layer = this._layers[i];
-                    //try
-                    //{
-                    //    enumerator3 = layer.GetEnumerator();
-                    //    while (enumerator3.MoveNext())
-                    //    {
-                    //        current = (INeuron)enumerator3.Current;
-                    //        double errorFactor = 0.0;
-                    //        foreach (INeuron neuron2 in current.ForwardConnections)
-                    //        {
-                    //            errorFactor += neuron2.DeltaValue * neuron2.Inputs[current];
-                    //        }
-                    //        current.UpdateDelta(errorFactor);
-                    //    }
-                    //}
-                    //finally
-                    //{
-                    //    if (enumerator3 is IDisposable)
-                    //    {
-                    //        ((IDisposable)enumerator3).Dispose();
-                    //    }
-                    //}
                     foreach (var item in this._layers[i])
                     {
                         double errorFactor = 0.0;
@@ -292,22 +214,6 @@ namespace LibNeuroOCR.Neuro
                 }
                 for (int i = 1; i <= this._layers.Count - 1; i ++)
                 {
-                    //IEnumerator enumerator;
-                    //try
-                    //{
-                    //    enumerator = this._layers[i].GetEnumerator();
-                    //    while (enumerator.MoveNext())
-                    //    {
-                    //        ((INeuron)enumerator.Current).UpdateFreeParams();
-                    //    }
-                    //}
-                    //finally
-                    //{
-                    //    if (enumerator is IDisposable)
-                    //    {
-                    //        ((IDisposable)enumerator).Dispose();
-                    //    }
-                    //}
                     foreach (var item in this._layers[i])
                     {
                         item.UpdateFreeParams();

@@ -41,21 +41,6 @@ namespace LibNeuroOCR.Neuro
         public double FindNetValue(Dictionary<INeuron, double> inputs, double bias)
         {
             double ret = 0;
-            //try
-            //{
-            //    double num2 = bias;
-            //    foreach (INeuron neuron in Inputs.Neurons())
-            //    {
-            //        num2 += Inputs[neuron] * neuron.OutputValue;
-            //    }
-            //    num = num2;
-            //}
-            //catch (Exception exception1)
-            //{
-            //    ProjectData.SetProjectError(exception1);
-            //    Exception e = exception1;
-            //    throw new NeuronStrategyException("Exception in Finding Net Value", e);
-            //}
             foreach (KeyValuePair<INeuron,double> pair in inputs)
             {
                 ret += pair.Value * pair.Key.OutputValue;
@@ -65,18 +50,6 @@ namespace LibNeuroOCR.Neuro
 
         public double FindNewBias(double bias, double delta)
         {
-            //double num;
-            //try
-            //{
-            //    num = bias + (0.5 * delta);
-            //}
-            //catch (Exception exception1)
-            //{
-            //    ProjectData.SetProjectError(exception1);
-            //    Exception e = exception1;
-            //    throw new NeuronStrategyException("Exception in Finding New Bias Value", e);
-            //}
-            //return num;
             try
             {
                 return bias + (0.5 * delta);
@@ -89,38 +62,8 @@ namespace LibNeuroOCR.Neuro
 
         public void UpdateWeights(ref Dictionary<INeuron, double> connections, double delta)
         {
-            //try
-            //{
-            //    IEnumerator enumerator;
-            //    try
-            //    {
-            //        enumerator = connections.Neurons().GetEnumerator();
-            //        while (enumerator.MoveNext())
-            //        {
-            //            INeuron current = (INeuron)enumerator.Current;
-            //            connections[current] += (0.5 * current.OutputValue) * delta;
-            //        }
-            //    }
-            //    finally
-            //    {
-            //        if (enumerator is IDisposable)
-            //        {
-            //            ((IDisposable)enumerator).Dispose();
-            //        }
-            //    }
-            //}
-            //catch (Exception exception1)
-            //{
-            //    ProjectData.SetProjectError(exception1);
-            //    Exception e = exception1;
-            //    throw new NeuronStrategyException("Exception while updating the weight values", e);
-            //}
             try
             {
-                //foreach (KeyValuePair<INeuron, double> pair in connections)
-                //{
-                //    pair.Value += (0.5 * pair.Key.OutputValue) * delta;
-                //}
                 foreach (var item in connections.Keys)
                 {
                     connections[item] += (0.5 * item.OutputValue) * delta;
