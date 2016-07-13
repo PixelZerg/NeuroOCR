@@ -1,0 +1,12 @@
+c:\users\pixelzerg\documents\visual studio 2015\Projects\NeuroOCR\NeuroOCR\bin\Debug\NeuroOCR.exe.config
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\bin\Debug\NeuroOCR.exe.config
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\bin\Debug\NeuroOCR.exe
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\bin\Debug\NeuroOCR.pdb
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\bin\Debug\LibNeuroOCR.dll
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\bin\Debug\LibNeuroOCR.pdb
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\obj\Debug\NeuroOCR.csprojResolveAssemblyReference.cache
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\obj\Debug\NeuroOCR.Properties.Resources.resources
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\obj\Debug\NeuroOCR.csproj.GenerateResource.Cache
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\obj\Debug\NeuroOCR.exe
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\obj\Debug\NeuroOCR.pdb
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\NeuroOCR\bin\Debug\BrainNet.NeuralFramework.dll

@@ -1,0 +1,5 @@
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\LibNeuroOCR\bin\Debug\LibNeuroOCR.dll
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\LibNeuroOCR\bin\Debug\LibNeuroOCR.pdb
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\LibNeuroOCR\obj\Debug\LibNeuroOCR.csprojResolveAssemblyReference.cache
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\LibNeuroOCR\obj\Debug\LibNeuroOCR.dll
+C:\Users\PixelZerg\Documents\GitHub\NeuroOCR\Source Code\LibNeuroOCR\obj\Debug\LibNeuroOCR.pdb
