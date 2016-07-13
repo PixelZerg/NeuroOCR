@@ -36,6 +36,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BrainNet.NeuralFramework">
+      <HintPath>..\..\..\..\OldPCDump\Projects\MedAI\MedAI\bin\Debug\BrainNet.NeuralFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -72,6 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibNeuroOCR\LibNeuroOCR.csproj">
+      <Project>{e1d81b71-79c1-493d-971c-2ed51523e8bc}</Project>
+      <Name>LibNeuroOCR</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

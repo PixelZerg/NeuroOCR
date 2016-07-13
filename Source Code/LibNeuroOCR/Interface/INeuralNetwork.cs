@@ -19,6 +19,7 @@ namespace LibNeuroOCR.Interface
         void ConnectNeurons(INeuron source, INeuron destination, double weight);
         List<double> GetOutput();
         List<double> RunNetwork(List<double> inputs);
+        List<double> RunNetwork(params double[] inputs);
         void TrainNetwork(TrainingData td);
     }
 }

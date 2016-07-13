@@ -12,6 +12,6 @@ namespace LibNeuroOCR.Interface
         double FindDelta(double output, double errorFactor);
         double FindNetValue(Dictionary<INeuron,double> inputs, double bias);
         double FindNewBias(double bias, double delta);
-        void UpdateWeights(ref Dictionary<INeuron, double> connections, double delta);
+        void UpdateWeights(Dictionary<INeuron, double> connections, double delta);
     }
 }

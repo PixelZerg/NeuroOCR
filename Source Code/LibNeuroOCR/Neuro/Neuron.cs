@@ -68,7 +68,7 @@ namespace LibNeuroOCR.Neuro
         {
             CheckStrategyNull();
             this.BiasValue = this.Strategy.FindNewBias(this.BiasValue, this.DeltaValue);
-            this.Strategy.UpdateWeights(ref this._inputs, this.DeltaValue);
+            this.Strategy.UpdateWeights(this._inputs, this.DeltaValue);
         }
 
         public void UpdateOutput()

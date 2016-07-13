@@ -100,9 +100,20 @@ namespace LibNeuroOCR.Neuro
 
         public List<double> GetOutput()
         {
-            throw new NotImplementedException();
+            List<double> l = new List<double>();
+            foreach (INeuron neuron in this.OutputLayer)
+            {
+                l.Add(neuron.OutputValue);
+            }
+            return l;
         }
 
+        public List<double> RunNetwork(params double[] inputs)
+        {
+            List<double> l = new List<double>();
+            l.AddRange(inputs);
+            return RunNetwork(l);
+        }
         public List<double> RunNetwork(List<double> inputs)
         {
             List<double> output = new List<double>();
@@ -143,7 +154,7 @@ namespace LibNeuroOCR.Neuro
             }
             catch (System.Exception e)
             {
-                throw new NeuroException("Error occurred while running the network. ", e);
+                throw new NeuroException("Error occurred while running the network. "+Environment.NewLine+e, e);
             }
             return output;
         }
@@ -159,28 +170,28 @@ namespace LibNeuroOCR.Neuro
             {
                 throw new NeuroException("Number of outputs doesn'''t match number of neurons in output layer", null);
             }
-            for (int i = 0; i < td.Inputs.Count; i++)
-            {
-                try
-                {
-                    td.Inputs[i] = td.Inputs[i];
-                }
-                catch (System.Exception e)
-                {
-                    throw new NeuroException("Error at input value loc:  " + (i + 1), e);
-                }
-            }
-            for (int i = 0; i < td.Outputs.Count; i++)
-            {
-                try
-                {
-                    td.Outputs[(int)i] = td.Outputs[i];
-                }
-                catch (System.Exception e)
-                {
-                    throw new NeuroException("Error at output value loc: " + (i + 1L), e);
-                }
-            }
+            //for (int i = 0; i < td.Inputs.Count; i++)
+            //{
+            //    try
+            //    {
+            //        td.Inputs[i] = td.Inputs[i];
+            //    }
+            //    catch (System.Exception e)
+            //    {
+            //        throw new NeuroException("Error at input value loc:  " + (i + 1), e);
+            //    }
+            //}
+            //for (int i = 0; i < td.Outputs.Count; i++)
+            //{
+            //    try
+            //    {
+            //        td.Outputs[(int)i] = td.Outputs[i];
+            //    }
+            //    catch (System.Exception e)
+            //    {
+            //        throw new NeuroException("Error at output value loc: " + (i + 1L), e);
+            //    }
+            //} //redundant ^^^^^^
             try
             {
                 for (int i = 0; i < this.InputLayer.Count; i++)
@@ -188,7 +199,7 @@ namespace LibNeuroOCR.Neuro
                     this.InputLayer[i].OutputValue = td.Inputs[i];
                 }
 
-                for (int i = 1; i < this.Layers.Count; i ++)
+                for (int i = 1; i < this.Layers.Count; i++)
                 {
                     foreach (var item in this._layers[i])
                     {
@@ -199,9 +210,10 @@ namespace LibNeuroOCR.Neuro
                 {
                     this.OutputLayer[i].UpdateDelta(td.Outputs[i] - this.OutputLayer[i].OutputValue);
                 }
-                for (int i = this._layers.Count - 2; i >= 1L; i ++)
+                //for (int i = this._layers.Count - 2; i >= 1; i++)
+                //for(int i = 0;i<this._layers.Count;i++)
+                for(int i = 1; i <= this.Layers.Count-2;i++)
                 {
-                    IEnumerator enumerator3;
                     foreach (var item in this._layers[i])
                     {
                         double errorFactor = 0.0;
@@ -212,7 +224,7 @@ namespace LibNeuroOCR.Neuro
                         item.UpdateDelta(errorFactor);
                     }
                 }
-                for (int i = 1; i <= this._layers.Count - 1; i ++)
+                for (int i = 1; i <= this._layers.Count - 1; i++)
                 {
                     foreach (var item in this._layers[i])
                     {
@@ -222,8 +234,185 @@ namespace LibNeuroOCR.Neuro
             }
             catch (System.Exception e)
             {
-                throw new NeuroException("Error occurred while training network. ", e);
+                throw new NeuroException("Error occurred while training network: " + Environment.NewLine + e, e);
             }
         }
+
+        //public void TrainNetwork(TrainingData t)
+        //{
+        //    if (this._layers.Count < 2)
+        //    {
+        //        throw new InadequateLayersException("You should have atleast two layers in your neural network to train it", null);
+        //    }
+        //    if (t.Inputs.Count != this.InputLayer.Count)
+        //    {
+        //        throw new NeuroException("Number of inputs doesn'''t match number of neurons in input layer", null);
+        //    }
+        //    if (t.Outputs.Count != this.OutputLayer.Count)
+        //    {
+        //        throw new NeuroException("Number of outputs doesn'''t match number of neurons in output layer", null);
+        //    }
+        //    long arg_7B_0 = 0L;
+        //    long num = (long)(checked(t.Inputs.Count - 1));
+        //    checked
+        //    {
+        //        for (long num2 = arg_7B_0; num2 <= num; num2 += 1L)
+        //        {
+        //            try
+        //            {
+        //                //t.Inputs.set_Item((int)num2, DoubleType.FromObject(t.Inputs.get_Item((int)num2)));
+        //                t.Inputs[(int)num2] = (double)t.Inputs[(int)num2];
+        //            }
+        //            catch (System.Exception e)
+        //            {
+        //                throw new NeuroException("Unable to convert the input value at location " + (num2 + 1L) + " to double", null);
+        //            }
+        //        }
+        //        long arg_F9_0 = 0L;
+        //        long num3 = unchecked((long)(checked(t.Outputs.Count - 1)));
+        //        for (long num2 = arg_F9_0; num2 <= num3; num2 += 1L)
+        //        {
+        //            try
+        //            {
+        //                t.Outputs[((int)num2)] = (double)t.Outputs[((int)num2)];
+        //            }
+        //            catch (System.Exception e)
+        //            {
+        //                throw new NeuroException("Unable to convert the output value at location " + (num2 + 1L) + " to double", null);
+        //            }
+        //        }
+        //        try
+        //        {
+        //            long num4 = 0L;
+        //            IEnumerator enumerator = this.InputLayer.GetEnumerator();
+
+        //            try
+        //            {
+        //                while (enumerator.MoveNext())
+        //                {
+        //                    INeuron neuron = (INeuron)enumerator.Current;
+        //                    neuron.OutputValue = (double)(t.Inputs[((int)num4)]);
+        //                    num4 += 1L;
+        //                }
+        //            }
+        //            finally
+        //            {
+        //                //IEnumerator enumerator;
+        //                if (enumerator is IDisposable)
+        //                {
+        //                    ((IDisposable)enumerator).Dispose();
+        //                }
+        //            }
+        //            long num5 = 1L;
+        //            long arg_1EE_0 = 1L;
+        //            long num6 = unchecked((long)(checked(this._layers.Count - 1)));
+        //            IEnumerator enumerator2 = null;
+        //            for (num5 = arg_1EE_0; num5 <= num6; num5 += 1L)
+        //            {
+        //                NList neuronLayer = this._layers[(int)num5];
+        //                enumerator2 = neuronLayer.GetEnumerator();
+        //                try
+        //                {
+        //                    while (enumerator2.MoveNext())
+        //                    {
+        //                        INeuron neuron = (INeuron)enumerator2.Current;
+        //                        neuron.UpdateOutput();
+        //                    }
+        //                }
+        //                finally
+        //                {
+        //                    if (enumerator2 is IDisposable)
+        //                    {
+        //                        ((IDisposable)enumerator2).Dispose();
+        //                    }
+        //                }
+        //            }
+        //            num4 = 0L;
+        //            IEnumerator enumerator3 = this.OutputLayer.GetEnumerator();
+        //            try
+        //            {
+        //                while (enumerator3.MoveNext())
+        //                {
+        //                    INeuron neuron = (INeuron)enumerator3.Current;
+        //                    neuron.UpdateDelta((double)((t.Outputs[((int)num4)] - neuron.OutputValue)));
+        //                    num4 += 1L;
+        //                }
+        //            }
+        //            finally
+        //            {
+        //                if (enumerator3 is IDisposable)
+        //                {
+        //                    ((IDisposable)enumerator3).Dispose();
+        //                }
+        //            }
+        //            for (num4 = unchecked((long)(checked(this._layers.Count - 2))); num4 >= 1L; num4 += -1L)
+        //            {
+        //                NList neuronLayer2 = this._layers[(int)num4];
+        //                unchecked
+        //                {
+        //                    IEnumerator enumerator4 = neuronLayer2.GetEnumerator();
+        //                    try
+        //                    {
+        //                        while (enumerator4.MoveNext())
+        //                        {
+        //                            INeuron neuron = (INeuron)enumerator4.Current;
+        //                            IEnumerator enumerator5 = neuron.ForwardConnections.GetEnumerator();
+        //                            double num7 = 0.0;
+        //                            try
+        //                            {
+        //                                while (enumerator5.MoveNext())
+        //                                {
+        //                                    INeuron neuron2 = (INeuron)enumerator.Current;
+        //                                    num7 += neuron2.DeltaValue * neuron2.Inputs[neuron];
+        //                                }
+        //                            }
+        //                            finally
+        //                            {
+        //                                if (enumerator5 is IDisposable)
+        //                                {
+        //                                    ((IDisposable)enumerator5).Dispose();
+        //                                }
+        //                            }
+        //                            neuron.UpdateDelta(num7);
+        //                        }
+        //                    }
+        //                    finally
+        //                    {
+        //                        if (enumerator4 is IDisposable)
+        //                        {
+        //                            ((IDisposable)enumerator4).Dispose();
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            long arg_3D0_0 = 1L;
+        //            long num8 = unchecked((long)(checked(this._layers.Count - 1)));
+        //            IEnumerator enumerator6 = this._layers[(int)num4].GetEnumerator();
+        //            for (num4 = arg_3D0_0; num4 <= num8; num4 += 1L)
+        //            {
+        //                try
+        //                {
+        //                    while (enumerator6.MoveNext())
+        //                    {
+        //                        INeuron neuron = (INeuron)enumerator6.Current;
+        //                        neuron.UpdateFreeParams();
+        //                    }
+        //                }
+        //                finally
+        //                {
+        //                    if (enumerator6 is IDisposable)
+        //                    {
+        //                        ((IDisposable)enumerator6).Dispose();
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        catch (System.Exception e)
+        //        {
+        //            throw new NeuroException("Error occurred while training network. "+e, e);
+        //        }
+        //    }
+        //}
+
     }
 }

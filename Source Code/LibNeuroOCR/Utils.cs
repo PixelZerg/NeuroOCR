@@ -11,7 +11,7 @@ namespace LibNeuroOCR
         public static Random r = new Random();
         public static double Rand()
         {
-            return r.Next(0, -1);
+            return r.Next(-1, 0);
         }
     }
 }

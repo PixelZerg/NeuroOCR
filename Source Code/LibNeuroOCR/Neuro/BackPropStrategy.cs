@@ -60,18 +60,21 @@ namespace LibNeuroOCR.Neuro
             }
         }
 
-        public void UpdateWeights(ref Dictionary<INeuron, double> connections, double delta)
+        public void UpdateWeights(Dictionary<INeuron, double> connections, double delta)
         {
             try
             {
+                Dictionary<INeuron, double> newconnections = new Dictionary<INeuron, double>();
                 foreach (var item in connections.Keys)
                 {
-                    connections[item] += (0.5 * item.OutputValue) * delta;
+                    //connections[item] += (0.5 * item.OutputValue) * delta;
+                    newconnections.Add(item, (0.5 * item.OutputValue) * delta);
                 }
+                connections = newconnections;
             }
             catch (System.Exception e)
             {
-                throw new NeuroException("Exception whilst updating weight values", e);
+                throw new NeuroException("Exception whilst updating weight values: "+e, e);
             }
         }
     }

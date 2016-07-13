@@ -17,11 +17,12 @@ namespace LibNeuroOCR.Neuro
             foreach (var item in neurons)
             {
                 NList nl = new NList();
-                for (int i = 0; i <= item - 1; i++)
+                for (int i = 0; i < item ; i++)
                 {
                     INeuron n = new Neuron(bps);
                     nl.Add(ref n);
                 }
+                nn.Layers.Add(nl);
             }
             nn.ConnectLayers();
             return nn;
