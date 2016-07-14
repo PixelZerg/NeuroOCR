@@ -18,7 +18,6 @@ namespace NeuroOCR
     {
         public static void Main(string[] args)
         {
-            Demo3();
         }
         public static void Demo1()
         {
@@ -71,6 +70,7 @@ namespace NeuroOCR
             Console.Write(c+" == To Binary ==> " + PrintBitArray(binary));
             Console.WriteLine(" == To Decimal ==> "+ Convert.ToInt32(PrintBitArray(binary), 2)+" == To Char ==> " + BinaryToChar(binary));
         }
+
         public static void Demo3()
         {
             for (int i = 48; i <= 57; i++)
