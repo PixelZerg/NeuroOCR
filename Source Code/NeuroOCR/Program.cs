@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-//using LibNeuroOCR.Neuro;
-//using LibNeuroOCR.Interface;
-//using LibNeuroOCR.Exception;
-//using LibNeuroOCR.Data;
-using BrainNet;
 using BrainNet.NeuralFramework;
 using System.Collections;
 using System.Threading;
@@ -16,8 +7,10 @@ namespace NeuroOCR
 {
     public static class Program
     {
+        public static Display GUI = new Display();
         public static void Main(string[] args)
         {
+            new System.Threading.Thread(() => GUI.ShowDialog()).Start();
         }
         public static void Demo1()
         {
