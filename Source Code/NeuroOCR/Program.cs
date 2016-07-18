@@ -2,6 +2,8 @@
 using BrainNet.NeuralFramework;
 using System.Collections;
 using System.Threading;
+using System.Drawing.Imaging;
+using System.Drawing;
 
 namespace NeuroOCR
 {
@@ -82,7 +84,16 @@ namespace NeuroOCR
                 Thread.Sleep(50);
             }
         }
-
+        public static ArrayList BitArrayToArray(BitArray bits)
+        {
+            ArrayList ret = new ArrayList();
+            foreach (bool bit in bits)
+            {
+                if (bit) ret.Add(1);
+                else ret.Add(0);
+            }
+            return ret;
+        }
         public static BitArray CharToBinary(char c)
         {
             if (Char.IsLetterOrDigit(c))
@@ -189,6 +200,64 @@ namespace NeuroOCR
             }
             return ret;
         }
+
+        public static BitArray RoundToBinary(ArrayList input)
+        {
+            BitArray ret = new BitArray(input.Count);
+            for (int i = 0; i < input.Count; i++)
+            {
+                if ((double)input[i] > 1)
+                {
+                    ret[i] = true;
+                }
+                else
+                {
+                    if (Math.Round((double)input[i], 0, MidpointRounding.AwayFromZero) >= 1)
+                    {
+                        ret[i] = true;
+                    }
+                    else
+                    {
+                        ret[i] = false;
+                    }
+                }
+            }
+            return ret;
+        }
+
+        public static ArrayList BitmapToArray(System.Drawing.Bitmap b)
+        {
+            ArrayList ret = new ArrayList();
+            BitmapData data = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            unsafe
+            {
+                for (int y = 0; y < b.Height; y++)
+                {
+                    byte* row = (byte*)data.Scan0 + (y * data.Stride);
+                    for (int x = 0; x < data.Width; x++)
+                    {
+                        //if (Color.FromArgb(row[x * 3], row[(x * 3) + 1], row[(x * 3) + 2]) == Color.Black)
+                        if (row[x * 3] <= 1)
+                        {
+                            ret.Add(1);
+                        }
+                        else
+                        {
+                            ret.Add(0);
+                        }
+                    }
+                }
+            }
+            b.UnlockBits(data);
+            return ret;
+        }
+        //public static ArrayList BitmapToArray(Bitmap b, List<Color> startcols, int variation)
+        //{
+        //    List<Point> ret = new List<Point>();
+            
+        //    return ret;
+        //}
 
         private static void drawpbar(int progress, int total)
         {

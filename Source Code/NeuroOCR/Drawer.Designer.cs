@@ -40,6 +40,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Drawer_Paint);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Drawer_KeyPress);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Drawer_MouseDown);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Drawer_MouseUp);
             this.ResumeLayout(false);
 
         }
